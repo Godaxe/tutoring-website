@@ -1,0 +1,211 @@
+// src/app/dashboard/page.tsx
+// Student dashboard - main hub after login
+
+import Link from 'next/link';
+
+const enrolledCourses = [
+  {
+    id: 'seo-fundamentals',
+    title: 'SEO Fundamentals',
+    instructor: 'John Doe',
+    progress: 65,
+    image: 'from-blue-400 to-blue-600',
+    lastLesson: 'Keyword Research Tools',
+    nextLesson: 'Competitor Analysis',
+    dueDate: 'Aug 15, 2026'
+  },
+  {
+    id: 'social-media-marketing',
+    title: 'Social Media Marketing',
+    instructor: 'Sarah Smith',
+    progress: 30,
+    image: 'from-purple-400 to-pink-600',
+    lastLesson: 'Instagram Strategy Basics',
+    nextLesson: 'Content Calendar Planning',
+    dueDate: 'Sep 1, 2026'
+  },
+  {
+    id: 'google-ads-mastery',
+    title: 'Google Ads Mastery',
+    instructor: 'Mike Chen',
+    progress: 90,
+    image: 'from-green-400 to-teal-600',
+    lastLesson: 'Campaign Optimization',
+    nextLesson: 'Final Project',
+    dueDate: 'Jul 30, 2026'
+  }
+];
+
+const upcomingSessions = [
+  { id: 1, tutor: 'John Doe', topic: 'SEO Audit Review', date: 'Jul 28, 2026', time: '10:00 AM', meetLink: '#' },
+  { id: 2, tutor: 'Sarah Smith', topic: 'Instagram Ad Setup', date: 'Jul 29, 2026', time: '2:00 PM', meetLink: '#' },
+  { id: 3, tutor: 'Mike Chen', topic: 'Google Ads Q&A', date: 'Jul 31, 2026', time: '11:00 AM', meetLink: '#' }
+];
+
+const recentActivity = [
+  { text: 'Completed "Keyword Research Tools" lesson in SEO Fundamentals', time: '2 hours ago' },
+  { text: 'Booked a session with Sarah Smith for Jul 29', time: '5 hours ago' },
+  { text: 'Submitted quiz for Module 3 in Google Ads Mastery', time: '1 day ago' },
+  { text: 'Earned "SEO Basics" certificate', time: '3 days ago' }
+];
+
+export default function DashboardPage() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Top Bar */}
+      <div className="bg-white border-b">
+        <div className="max-w-6xl mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-800">Welcome back, Alex!</h1>
+              <p className="text-gray-600">Keep up the great work on your learning journey.</p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <button className="relative text-gray-600 hover:text-blue-600">
+                🔔
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+              </button>
+              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">A</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Main Content - Left 2 Columns */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { label: 'Enrolled Courses', value: '3', icon: '📚', color: 'bg-blue-100 text-blue-600' },
+                { label: 'Completed Lessons', value: '42', icon: '✅', color: 'bg-green-100 text-green-600' },
+                { label: 'Certificates', value: '2', icon: '🏆', color: 'bg-purple-100 text-purple-600' }
+              ].map((stat, i) => (
+                <div key={i} className="bg-white rounded-xl shadow-sm p-4">
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-10 h-10 ${stat.color} rounded-lg flex items-center justify-center text-lg`}>{stat.icon}</div>
+                    <div>
+                      <p className="text-2xl font-bold text-gray-800">{stat.value}</p>
+                      <p className="text-sm text-gray-500">{stat.label}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Enrolled Courses */}
+            <div>
+              <h2 className="text-xl font-bold text-gray-800 mb-4">My Courses</h2>
+              <div className="space-y-4">
+                {enrolledCourses.map(course => (
+                  <div key={course.id} className="bg-white rounded-xl shadow-sm p-5">
+                    <div className="flex items-start space-x-4">
+                      <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${course.image} flex-shrink-0 flex items-center justify-center text-white font-bold text-sm text-center`}>
+                        {course.title.split(' ')[0]}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="font-semibold text-gray-800">{course.title}</h3>
+                            <p className="text-sm text-gray-500">Instructor: {course.instructor}</p>
+                          </div>
+                          <span className="text-sm text-orange-600 font-medium">Due: {course.dueDate}</span>
+                        </div>
+                        {/* Progress Bar */}
+                        <div className="mt-3">
+                          <div className="flex justify-between text-sm mb-1">
+                            <span className="text-gray-600">Progress</span>
+                            <span className="text-blue-600 font-medium">{course.progress}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="bg-blue-600 h-2 rounded-full" style={{ width: `${course.progress}%` }}></div>
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center mt-3">
+                          <p className="text-sm text-gray-500">
+                            📖 Next: <span className="text-gray-700">{course.nextLesson}</span>
+                          </p>
+                          <Link 
+                            href={`/courses/${course.id}/learn`} 
+                            className="bg-blue-600 text-white px-4 py-1.5 rounded-lg text-sm hover:bg-blue-700 transition"
+                          >
+                            Continue
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Sidebar - Right Column */}
+          <div className="space-y-6">
+            {/* Upcoming Sessions */}
+            <div className="bg-white rounded-xl shadow-sm p-5">
+              <h3 className="font-semibold text-gray-800 mb-4">Upcoming Sessions</h3>
+              <div className="space-y-4">
+                {upcomingSessions.map(session => (
+                  <div key={session.id} className="border rounded-lg p-3">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="font-medium text-gray-800 text-sm">{session.topic}</p>
+                        <p className="text-xs text-gray-500">with {session.tutor}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center text-xs text-gray-500 mb-2 space-x-3">
+                      <span>📅 {session.date}</span>
+                      <span>🕐 {session.time}</span>
+                    </div>
+                    <button className="w-full bg-green-600 text-white py-1.5 rounded text-sm hover:bg-green-700 transition">
+                      Join Session
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <Link href="/tutors" className="block text-center text-blue-600 text-sm mt-4 hover:text-blue-700">
+                Book New Session →
+              </Link>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-white rounded-xl shadow-sm p-5">
+              <h3 className="font-semibold text-gray-800 mb-4">Recent Activity</h3>
+              <div className="space-y-3">
+                {recentActivity.map((activity, i) => (
+                  <div key={i} className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-sm text-gray-700">{activity.text}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{activity.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="bg-white rounded-xl shadow-sm p-5">
+              <h3 className="font-semibold text-gray-800 mb-4">Quick Links</h3>
+              <div className="space-y-2">
+                {[
+                  { label: 'My Certificates', link: '/dashboard/certificates', icon: '🏆' },
+                  { label: 'Messages', link: '/dashboard/messages', icon: '💬' },
+                  { label: 'Wishlist', link: '/dashboard/wishlist', icon: '❤️' },
+                  { label: 'Settings', link: '/dashboard/settings', icon: '⚙️' }
+                ].map((link, i) => (
+                  <Link key={i} href={link.link} className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition text-gray-700">
+                    <span>{link.icon}</span>
+                    <span className="text-sm">{link.label}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
