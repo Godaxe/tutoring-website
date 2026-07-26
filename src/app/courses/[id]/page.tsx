@@ -33,9 +33,7 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2">
-            {/* What You'll Learn */}
             <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">What You'll Learn</h2>
               <div className="grid md:grid-cols-2 gap-3">
@@ -48,7 +46,6 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
               </div>
             </div>
 
-            {/* Curriculum */}
             <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
               <h2 className="text-2xl font-bold mb-6 text-gray-800">Course Curriculum</h2>
               {course.curriculum.map((mod, i) => (
@@ -69,7 +66,6 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
               ))}
             </div>
 
-            {/* Instructor */}
             <div className="bg-white rounded-xl shadow-sm p-6">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">Your Instructor</h2>
               <div className="flex items-start space-x-4">
@@ -85,19 +81,14 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
             </div>
           </div>
 
-          {/* Sidebar */}
           <div>
             <div className="bg-white rounded-xl shadow-sm p-6 sticky top-24">
               <div className="bg-gray-200 rounded-lg h-48 flex items-center justify-center mb-6">
                 <span className="text-6xl text-gray-400">▶</span>
               </div>
               <div className="text-3xl font-bold text-gray-800 mb-4">${course.price}</div>
-              <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition mb-3">
-                Enroll Now
-              </button>
-              <button className="w-full border-2 border-blue-600 text-blue-600 py-3 rounded-lg font-semibold hover:bg-blue-50 transition mb-6">
-                Add to Wishlist
-              </button>
+              <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition mb-3">Enroll Now</button>
+              <button className="w-full border-2 border-blue-600 text-blue-600 py-3 rounded-lg font-semibold hover:bg-blue-50 transition mb-6">Add to Wishlist</button>
               <div className="space-y-3 text-gray-700">
                 <div className="flex justify-between"><span>Duration</span><span className="font-semibold">{course.duration}</span></div>
                 <div className="flex justify-between"><span>Lessons</span><span className="font-semibold">{course.lessons}</span></div>
